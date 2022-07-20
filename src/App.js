@@ -1,25 +1,29 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import "./App.css";
+import UserForm from "./components/User/UserForm/UserForm";
+import UserList from "./components/User/UserLIst/Userlist";
 
-function App() {
+const allUsers = [
+  { userName: "Ayush", userAge: 20, id: Math.random().toString() },
+  { userName: "Avinash", userAge: 32, id: Math.random().toString() },
+];
+
+const App = () => {
+  const [updateUsers, setUpdatedUsers] = useState(allUsers);
+
+  const onSubmitHandler = (detail) => {
+    setUpdatedUsers((prevState) => {
+      return [detail, ...prevState];
+    });
+    console.log(detail);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <UserForm onSubmit={onSubmitHandler} className="" />
+      <UserList items={updateUsers} />
     </div>
   );
-}
+};
 
 export default App;
