@@ -30,8 +30,14 @@ const UserForm = (props) => {
 
   const userSubmitHandler = (event) => {
     event.preventDefault();
+    if(userAge.trim().length == 0 || userName.trim().length == 0){
+      alert('error')
+      return
+    }
     const userDetails = { userAge: userAge, userName: userName };
     props.onSubmit(userDetails);
+    setUserAge('')
+    setUserName('')
   };
 
   return (
