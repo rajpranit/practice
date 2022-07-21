@@ -13,6 +13,7 @@ const App = () => {
 
   const onSubmitHandler = (detail) => {
     setUpdatedUsers((prevState) => {
+
       return [detail, ...prevState];
     });
     console.log(detail);
@@ -20,7 +21,7 @@ const App = () => {
 
   return (
     <div>
-      <UserForm onSubmit={onSubmitHandler} className="" />
+      <UserForm onSubmit={onSubmitHandler}/>
       <UserList items={updateUsers} />
     </div>
   );
