@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import styles from "./UserForm.module.css";
 import Card from "../../UI/Card";
 import Button from "../../UI/Button";
+import ErrorModal from "../../UI/ErrorModal";
 
 const UserForm = (props) => {
   const [userName, setUserName] = useState("");
@@ -30,17 +31,19 @@ const UserForm = (props) => {
 
   const userSubmitHandler = (event) => {
     event.preventDefault();
-    if(userAge.trim().length == 0 || userName.trim().length == 0){
+    if(userAge.trim().length <= 0 || userName.trim().length <= 0 || +userAge <= 0){
       alert('error')
       return
     }
-    const userDetails = { userAge: userAge, userName: userName };
+    const userDetails = { userAge: userAge, userName: userName , id: Math.random().toString() };
     props.onSubmit(userDetails);
     setUserAge('')
     setUserName('')
   };
 
   return (
+    <div>
+    <ErrorModal error='An Error Occured' message="Something went wrong"></ErrorModal>
     <Card className={styles.input}>
       <form onSubmit={userSubmitHandler}>
         <label htmlFor="username">UserName</label>
@@ -50,6 +53,7 @@ const UserForm = (props) => {
         <Button type="submit">Submit</Button>
       </form>
     </Card>
+    </div>
   );
 };
 
