@@ -5,23 +5,25 @@ import Button from "../../UI/Button";
 import ErrorModal from "../../UI/ErrorModal";
 
 const UserForm = (props) => {
-  const [userName, setUserName] = useState("");
-  const [userAge, setUserAge] = useState("");
+  // const [userName, setUserName] = useState("");
+  // const [userAge, setUserAge] = useState("");
   const [error, setError] = useState(false);
   const userInputAge = useRef();
   const userInputName = useRef();
 
-  const userNameHandler = (event) => {
-    setUserName(event.target.value);
-  };
+  // const userNameHandler = (event) => {
+  //   setUserName(event.target.value);
+  // };
 
-  const userAgeHandler = (event) => {
-    setUserAge(event.target.value);
-  };
+  // const userAgeHandler = (event) => {
+  //   setUserAge(event.target.value);
+  // };
 
   const userSubmitHandler = (event) => {
     event.preventDefault();
-    console.log(userInputAge);
+    const userName = userInputName.current.value
+    const userAge = userInputAge.current.value
+    // console.log(userInputAge);
     if (userAge.trim().length <= 0 || userName.trim().length <= 0) {
       setError({
         error: "An Error Occured",
@@ -42,8 +44,10 @@ const UserForm = (props) => {
       id: Math.random().toString(),
     };
     props.onSubmit(userDetails);
-    setUserAge("");
-    setUserName("");
+    userInputAge.current.value = ''
+    userInputName.current.value = ''
+    // setUserAge("");
+    // setUserName("");
   };
 
   const errorHandler = () => {
@@ -65,16 +69,16 @@ const UserForm = (props) => {
           <input
             id="username"
             type="text"
-            value={userName}
-            onChange={userNameHandler}
+            // value={userName}
+            // onChange={userNameHandler}
             ref={userInputName}
           />
           <label htmlFor="age">Age</label>
           <input
             id="age"
             type="number"
-            value={userAge}
-            onChange={userAgeHandler}
+            // value={userAge}
+            // onChange={userAgeHandler}
             ref={userInputAge}
           />
           <Button type="submit">Submit</Button>

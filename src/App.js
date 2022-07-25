@@ -15,7 +15,6 @@ const App = () => {
     setUpdatedUsers((prevState) => {
       return [detail, ...prevState];
     });
-    console.log(detail);
   };
 
   return (
